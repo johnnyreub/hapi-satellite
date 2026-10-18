@@ -1,0 +1,25 @@
+[Unit]
+Description=Wyoming voice satellite (hapi) for Home Assistant Assist
+Documentation=https://www.home-assistant.io/integrations/wyoming/
+After=network-online.target sound.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/opt/wyoming/run-satellite.sh
+Restart=always
+RestartSec=5
+User=root
+
+# The satellite only needs audio + outbound TCP to Home Assistant.
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=full
+ProtectHome=yes
+ReadWritePaths=/opt/wyoming
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

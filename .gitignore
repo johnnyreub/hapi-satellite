@@ -1,0 +1,6 @@
+secrets/
+keys.txt
+*.ppk
+*.pem
+id_*
+.venv/

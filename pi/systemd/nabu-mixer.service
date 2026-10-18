@@ -1,0 +1,39 @@
+[Unit]
+Description=Local brown-noise mixer owning the DigiAMP sound card (hapi)
+Documentation=file:///opt/wyoming/bin/nabumix.py
+After=sound.target
+Wants=sound.target
+
+# The satellite talks to the mixer over /run/nabumix. Ordering here means a
+# fresh boot never starts the satellite before the mixer is listening, and
+# restarting the satellite does not disturb the noise.
+Before=wyoming-satellite.service
+
+[Service]
+Type=simple
+ExecStart=/opt/wyoming/bin/nabumix.py
+Restart=always
+RestartSec=3
+User=root
+
+# Creates /run/nabumix before start and removes it after stop, so no stale
+# socket file can survive a crash.
+RuntimeDirectory=nabumix
+RuntimeDirectoryMode=0755
+
+# The mixer needs the sound card and its socket directory; nothing else.
+NoNewPrivileges=yes
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectControlGroups=yes
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=nabumix
+
+[Install]
+WantedBy=multi-user.target

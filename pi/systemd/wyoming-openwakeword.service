@@ -1,0 +1,19 @@
+[Unit]
+Description=Local openWakeWord detection for hapi
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/opt/wyoming-openwakeword/bin/python -m wyoming_openwakeword --uri tcp://127.0.0.1:10400 --threshold 0.5 --trigger-level 1 --refractory-seconds 5.0
+Restart=always
+RestartSec=3
+DynamicUser=yes
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+Environment=OPENBLAS_NUM_THREADS=1
+Environment=OMP_NUM_THREADS=1
+
+[Install]
+WantedBy=multi-user.target

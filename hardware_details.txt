@@ -1,0 +1,11 @@
+
+raspberry pi 3b with 1GB ram
+speaker: audio hat pi digiamp 35W - volume should default to 75%, this is very loud.
+microphone: SunFounder USB 2.0 Mini Microphone for Raspberry Pi 4 Model B, Module
+IP is 192.168.67.23 - access via ssh, user hapi, see mcp for token
+
+Homeassistant:
+running as a vm at 192.168.66.3:8123
+see mcp for api token
+
+

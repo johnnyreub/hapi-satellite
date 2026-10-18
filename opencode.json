@@ -1,0 +1,37 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "openrouter": {
+      "options": {
+        "apiKey": "{file:./secrets/openrouter-jev-key.txt}"
+      },
+      "models": {
+        "typesafe/jev-router": {
+          "name": "Jev Router"
+        }
+      }
+    }
+  },
+  "mcp": {
+    "home-assistant": {
+      "type": "remote",
+      "url": "http://192.168.66.3:8123/api/mcp",
+      "enabled": false,
+      "oauth": false,
+      "timeout": 30000,
+      "headers": {
+        "Authorization": "Bearer {file:./secrets/ha-token.txt}"
+      }
+    },
+    "ha-mcp": {
+      "type": "local",
+      "command": ["F:\\opencode\\homeassistant\\.venv\\Scripts\\ha-mcp.exe"],
+      "cwd": "F:\\opencode\\homeassistant",
+      "enabled": true,
+      "timeout": 60000,
+      "environment": {
+        "HAMCP_ENV_FILE": "F:\\opencode\\homeassistant\\secrets\\ha-mcp.env"
+      }
+    }
+  }
+}

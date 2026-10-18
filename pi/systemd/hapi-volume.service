@@ -1,0 +1,25 @@
+[Unit]
+Description=hapi satellite control endpoint (volume)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=hapi
+Group=hapi
+Environment=HAPI_CONTROL_HOST=0.0.0.0
+Environment=HAPI_CONTROL_PORT=8977
+ExecStart=/opt/hapi-control/server.py
+Restart=always
+RestartSec=3
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+MemoryDenyWriteExecute=yes
+
+[Install]
+WantedBy=multi-user.target

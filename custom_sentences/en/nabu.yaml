@@ -1,0 +1,30 @@
+# Custom Assist sentences for the hapi satellite's brown-noise mixer (nabumix).
+# Deploy target: HA /config/custom_sentences/en/nabu.yaml
+# Actions are executed on the Pi by the satellite's --transcript-command hook
+# (/opt/wyoming/bin/nabu-voice-ctl.py).
+#
+# Sentences map onto the built-in HassRespond intent (its handler only speaks
+# the provided `response` slot and takes no action). A custom intent name
+# (e.g. NabuStopNoise) has no handler in HA and answers with the error
+# "Unknown intent <name>", which is what TTS then reads aloud.
+language: en
+intents:
+  HassRespond:
+    data:
+      - sentences:
+          - "stop"
+          - "stop brown noise"
+          - "stop the brown noise"
+          - "turn off brown noise"
+          - "brown noise off"
+          - "stop noise"
+        slots:
+          response: Stopped
+      - sentences:
+          - "play brown noise"
+          - "play the brown noise"
+          - "start brown noise"
+          - "turn on brown noise"
+          - "brown noise on"
+        slots:
+          response: Playing brown noise
